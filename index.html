@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title> Cifrar cadenas con factory de Angularjs</title>
+		<link rel="stylesheet" href="estilos.css" />
+		<script src="js/google-crypto-aes.min.js" type="text/javascript"></script>
+		<script src="https://code.angularjs.org/1.5.8/angular.js" type="text/javascript"></script>
+		<script src="js/app.js" type="text/javascript"></script>
+		<script src="js/service.js" type="text/javascript"></script>
+	</head>
+	<body ng-app="App">
+		<div ng-controller="ctrlCifrar">
+			<h3>Cadena a cifrar</h3>
+			<label>{{cadena}}</label>
+			<br>
+			<br>
+			<h3>Cadena cifrada a Base64</h3>
+			<label>{{cadenaCifrada}}</label>
+
+		</div>
+	</body>
+</html>
