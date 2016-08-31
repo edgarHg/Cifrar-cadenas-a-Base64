@@ -1,6 +1,6 @@
 angular.module('fService', [])
 
-	.factory('cifrarAES', [function(){
+	.factory('CryptoJSAES', [function(){
 		return {
 			repetirCadena : function (cadena, longitud) {
 				var out = cadena.toString();
@@ -12,7 +12,7 @@ angular.module('fService', [])
 				var wordArray = CryptoJS.enc.Utf8.parse(this.repetirCadena(cadena, 16));
 				return CryptoJS.enc.Base64.stringify(wordArray);
 			},
-			convertir : function(cadena, keyUser){
+			cifrar : function(cadena, keyUser){
 				var keyUsuario = keyUser;
 				var keyValue = null;
 				var key = null;
@@ -34,6 +34,41 @@ angular.module('fService', [])
 				var encrypt2Value = CryptoJS.AES.encrypt(cadena.toString() + '<>' + textencryipted.toString(), key, {mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7, iv: iv, });
 
 				return encrypt2Value.toString();
+			},
+			descifrar : function(cadena, keyUser){
+				var data = cadena;
+				var userSesion  = keyUser;
+				var keyValue    = null;
+				var key2         = null;
+
+				keyValue = this.keyBase64(userSesion.toString());
+				key2 = CryptoJS.enc.Base64.parse(keyValue);
+
+				console.log(data);
+				var rawData = atob(data);
+				console.log(rawData);
+
+				var iv = btoa(rawData.substring(0, 16));
+
+				var crypttext =  CryptoJS.enc.Base64.parse(data);
+
+				var plaintextArray = CryptoJS.AES.decrypt(
+						{
+							ciphertext: CryptoJS.enc.Base64.parse(data),
+							salt: ""
+						},
+				CryptoJS.enc.Hex.parse(key2.toString()),
+						{iv: CryptoJS.enc.Base64.parse(iv)}
+				);
+
+				function hex2a(hex) {
+					var str = '';
+					for (var i = 0; i < hex.length; i += 2)
+						str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+					return str;
+				}
+
+				return hex2a(plaintextArray.toString());
 			}
 		}
 	}])
