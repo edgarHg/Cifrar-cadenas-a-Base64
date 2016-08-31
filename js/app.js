@@ -1,7 +1,10 @@
 angular.module('App', ['fService'])
 	.controller('ctrlCifrar', ['$scope', 'cifrarAES', function($scope, cifrarAES){
 		
-		$scope.cadena = "Hola Mundo";
-		$scope.cadenaCifrada = cifrarAES.convertir($scope.cadena, 30082016);
-
+		$scope.mdlCadena = "";
+		$scope.cadenaCifrada;
+		$scope.keyUsuario = 30082016;
+		$scope.CifrarCadena = function(){
+			$scope.cadenaCifrada = cifrarAES.convertir($scope.mdlCadena, $scope.keyUsuario);
+		};
 	}])
