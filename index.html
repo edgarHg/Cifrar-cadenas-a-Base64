@@ -12,16 +12,16 @@
 		<div ng-controller="ctrlCifrar">
 			<br>
 			<h3>Cifrar Cadena</h3>
-			<input type="text" ng-model="mdlCadena" ng-keyup="CifrarCadena()"/>
+			<input type="text" ng-model="objIteracion.mdlCadena" ng-keyup="CifrarCadena()"/>
 			<br>
 			<br>
 			<h3>Cadena cifrada a Base64</h3>
-			<label>{{cadenaCifrada}}</label>
+			<label>{{objIteracion.cadenaCifrada}}</label>
 			<br>
 			<br>
 			<h3>Descifrar Base64</h3>
 			<input type="button" value=" Descifrar " ng-click="DescifrarBase64()">
-			<label>{{cadenaDescifrada}}</label>
+			<label>{{objIteracion.cadenaDescifrada}}</label>
 		</div>
 	</body>
 </html>
